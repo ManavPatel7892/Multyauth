@@ -10,6 +10,8 @@
             <div class="card">
                 <div class="header">
                     <p class="lead">Update User</p>
+
+
                 </div>
                 <div class="body">
                     <form class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}">
