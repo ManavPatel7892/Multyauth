@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
-    public function user()
+    public function admin()
     {
-        $users = User::where('role', '=', 'user')->get();
-        return view('user/user', compact('users'));
+        $admin = User::where('role', '=', 'admin')->get();
+        return view('admin/admin', compact('admin'));
     }
 
     public function dashboard(){
@@ -19,7 +20,7 @@ class UserController extends Controller
 
     public function create(){
 
-        return view('user/create');
+        return view('admin/create');
     }
 
     public function store(Request $request){
@@ -49,12 +50,12 @@ class UserController extends Controller
         $user->password = $request->password;
 
         $user->save();
-        return redirect('/user')->withSuccess('New User Submited !!!');
+        return redirect('/admin')->withSuccess('New Admin Submited !!!');
     }
 
     public function edit($id){
         $user = User::where('id',$id)->first();
-        return view('user/edit',compact('user'));
+        return view('admin/edit',compact('user'));
     }
 
     public function update(Request $request, $id){
@@ -85,13 +86,12 @@ class UserController extends Controller
         $user->email = $request->email;
 
         $user->update();
-        return redirect('/user')->withSuccess('user Updated !!!');
+        return redirect('/admin')->withSuccess('Admin Updated !!!');
     }
 
     public function delete($id){
         $user = User::where('id',$id)->first();
         $user->delete();
-        return redirect('/user')->withSuccess('user Deleted !!!');
+        return redirect('/admin')->withSuccess('Admin Deleted !!!');
     }
-
 }

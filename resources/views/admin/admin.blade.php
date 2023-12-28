@@ -11,7 +11,7 @@
             </div>
             @endif
             <div class="text-right" style="float: center">
-                <a type="button" href="/user/create" class="btn btn-outline-secondary">New User</a>
+                <a type="button" href="/admin/create" class="btn btn-outline-secondary">New Admin</a>
             </div>
 
         </div>
@@ -31,22 +31,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($admin as $admin)
                         <tr>
-                            <td>{{ $user->id }}</td>
-                            <td><img src="/userImage/{{ $user->image }}" class="rounded-circle" width="80" height="80"></td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->gender }}</td>
+                            <td>{{ $admin->id }}</td>
+                            <td><img src="/userImage/{{ $admin->image }}" class="rounded-circle" width="80" height="80"></td>
+                            <td>{{ $admin->name }}</td>
+                            <td>{{ $admin->last_name }}</td>
+                            <td>{{ $admin->gender }}</td>
                             <?php
-                              $date_of_birth = date_create($user->date_of_birth);
+                              $date_of_birth = date_create($admin->date_of_birth);
                             ?>
                             <td><?php echo date_format($date_of_birth,"d-M-Y");?></td>
-                            <td>{{ $user->email }}</td>
+                            <td>{{ $admin->email }}</td>
                             <td>
-                                <a href="/user/edit/{{ $user->id }}" class="btn btn-outline-secondary btn-md">Edit</a>
+                                <a href="/admin/edit/{{ $admin->id }}" class="btn btn-outline-secondary btn-md">Edit</a>
 
-                                <a href="/user/delete/{{ $user->id }}" class="btn btn-outline-danger btn-md">Delete</a>
+                                <a href="/admin/delete/{{ $admin->id }}" class="btn btn-outline-danger btn-md">Delete</a>
                             </td>
                         </tr>
                         @endforeach
