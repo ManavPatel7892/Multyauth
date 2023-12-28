@@ -21,10 +21,12 @@
                     <thead>
                         <tr>
                             <th scope="row">No.</th>
+                            <th>Image</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Mobile No</th>
+                            <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Date Of Birth</th>
+                            <th>email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -32,10 +34,15 @@
                         @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
+                            <td><img src="/userImage/{{ $user->image }}" class="rounded-circle" width="80" height="80"></td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->gender }}</td>
+                            <?php
+                              $date_of_birth = date_create($user->date_of_birth);
+                            ?>
+                            <td><?php echo date_format($date_of_birth,"d-M-Y");?></td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->address }}</td>
-                            <td>{{ $user->number }}</td>
                             <td>
                                 <a href="/user/edit/{{ $user->id }}" class="btn btn-outline-secondary btn-md">Edit</a>
 
