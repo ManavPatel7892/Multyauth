@@ -9,58 +9,64 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <p class="lead"> Upate Profile</p>
+                    <p class="lead">Update User</p>
+
+
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" method="POST" action="/user/update/{{$user->id}}">
+                    <form class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>Username</label>
-                            <input type="text" name="name" class="form-control"
-                                value="{{ old('name', $user->name) }}" placeholder="Enter your Username"
-                                value="{{ old('name') }}">
+                            <input type="text" name="name" class="form-control" placeholder="Enter your Username"  value="{{ old('name', $user->name) }}">
                             @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <span class="text-danger"><b>{{ $errors->first('name') }}</b></span>
+                            @endif
+                        </div>
+                        <div class="form-group c_form_group">
+                            <label>Last Name</label>
+                            <input type="text" name="last_name" class="form-control"
+                                placeholder="Enter your Last Name"  value="{{ old('last_name', $user->last_name) }}" value="{{ old('last_name') }}">
+                            @if ($errors->has('last_name'))
+                                <span class="text-danger"><b>{{ $errors->first('last_name') }}</b></span>
+                            @endif
+                        </div>
+                        <div class="form-group c_form_group">
+                            <label>Select Gander</label>
+                            <select name="gender" class="form-control">
+                                <option selected>Select</option>
+                                <option value="male"  <?php  echo ($user->gender == 'male') ? 'selected': '';?>>Male</option>
+                                <option value="female" <?php  echo ($user->gender == 'female') ? 'selected': '';?>>Female</option>
+                            </select>
+                            @if ($errors->has('gender'))
+                                <span class="text-danger"><b>{{ $errors->first('gender') }}</b></span>
+                            @endif
+                        </div>
+                        <div class="form-group c_form_group">
+                            <label>Date Of Birth</label>
+                            <input type="date"  name="date_of_birth" class="form-control "
+                                placeholder="Enter your Date Of Birth"  value="{{ old('date_of_birth', $user->date_of_birth) }}">
+                            @if ($errors->has('date_of_birth'))
+                                <span class="text-danger"><b>{{ $errors->first('date_of_birth') }}</b></span>
+                            @endif
+                        </div>
+
+                        <div class="form-group c_form_group">
+                            <label>Image</label>
+                            <input type="file" name="image" class="form-control"
+                                placeholder="Enter your Image" value="{{ old('image') }}">
+                            @if ($errors->has('image'))
+                                <span class="text-danger"><b>{{ $errors->first('image') }}</span>
                             @endif
                         </div>
                         <div class="form-group c_form_group">
                             <label>Email</label>
                             <input type="email" name="email" class="form-control"
-                                value="{{ old('email', $user->email) }}" placeholder="Enter your email address"
-                                value="{{ old('email') }}">
+                                placeholder="Enter your email address"  value="{{ old('email', $user->email) }}">
                             @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                <span class="text-danger"><b>{{ $errors->first('email') }}</b></span>
                             @endif
                         </div>
-                        {{-- <div class="form-group c_form_group">
-                            <label>Address</label>
-                            <input type="text" name="address" class="form-control"
-                                value="{{ old('address', $user->address) }}" placeholder="Enter address"
-                                value="{{ old('address') }}">
-                            @if ($errors->has('address'))
-                                <span class="text-danger">{{ $errors->first('address') }}</span>
-                            @endif
-                        </div>
-
-                        <div class="form-group c_form_group">
-                            <label>Phone No</label>
-                            <input type="number" name="number" class="form-control"
-                                value="{{ old('number', $user->number) }}" placeholder="Enter number"
-                                value="{{ old('number') }}">
-                            @if ($errors->has('number'))
-                                <span class="text-danger">{{ $errors->first('number') }}</span>
-                            @endif
-                        </div> --}}
-                        {{-- <div class="form-group c_form_group">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Enter password">
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div> --}}
-
-
-
                         <button type="submit" class="btn btn-dark btn-lg btn-block">Update</button>
                     </form>
                 </div>

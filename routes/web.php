@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +30,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/user', [UserController::class, 'user'])->name('user');
-    Route::get('user/create', [UserController::class,'create'])->name('products.create');
-    Route::post('user/store', [UserController::class,'store'])->name('products.store');
+    Route::get('user/create', [UserController::class,'create'])->name('user.create');
+    Route::post('user/store', [UserController::class,'store'])->name('user.store');
     Route::get('user/edit/{id}', [UserController::class,'edit']);
     Route::post('user/update/{id}', [UserController::class,'update']);
     Route::get('user/delete/{id}', [UserController::class,'delete']);
-    Route::get('user/show/{id}', [UserController::class,'show']);
+
+
+    Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+    Route::get('admin/create', [AdminController::class,'create'])->name('admin.create');
+    Route::post('admin/store', [AdminController::class,'store'])->name('admin.store');
+    Route::get('admin/edit/{id}', [AdminController::class,'edit']);
+    Route::post('admin/update/{id}', [AdminController::class,'update']);
+    Route::get('admin/delete/{id}', [AdminController::class,'delete']);
+
 });
 
 require __DIR__.'/auth.php';

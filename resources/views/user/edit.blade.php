@@ -30,6 +30,17 @@
                             @endif
                         </div>
                         <div class="form-group c_form_group">
+                            <label>Select Role</label>
+                            <select name="role" class="form-control">
+                                <option selected>Select</option>
+                                <option value="admin" <?php  echo ($user->role == 'admin') ? 'selected': '';?>>Admin</option>
+                                <option value="user" <?php  echo ($user->role == 'user') ? 'selected': '';?>>User</option>
+                            </select>
+                            @if ($errors->has('role'))
+                                <span class="text-danger"><b>{{ $errors->first('role') }}</b></span>
+                            @endif
+                        </div>
+                        <div class="form-group c_form_group">
                             <label>Select Gander</label>
                             <select name="gender" class="form-control">
                                 <option selected>Select</option>
