@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -9,18 +10,26 @@ class AdminController extends Controller
 {
     public function admin()
     {
+        $user_id = Auth::user()->id;
+        $users = User::where('id', $user_id)->get();
+       $userrole= $users[0]['role'];
         $admin = User::where('role', '=', 'admin')->get();
-        return view('admin/admin', compact('admin'));
+        return view('admin/admin', compact('admin','userrole'));
     }
 
     public function dashboard(){
-        return view('dashboard');
+        $user_id = Auth::user()->id;
+        $users = User::where('id', $user_id)->get();
+       $userrole= $users[0]['role'];
+        return view('dashboard',compact('userrole'));
     }
 
 
     public function create(){
-
-        return view('admin/create');
+        $user_id = Auth::user()->id;
+        $users = User::where('id', $user_id)->get();
+       $userrole= $users[0]['role'];
+        return view('admin/create',compact('userrole'));
     }
 
     public function store(Request $request){
@@ -54,8 +63,11 @@ class AdminController extends Controller
     }
 
     public function edit($id){
+        $user_id = Auth::user()->id;
+        $users = User::where('id', $user_id)->get();
+       $userrole= $users[0]['role'];
         $user = User::where('id',$id)->first();
-        return view('admin/edit',compact('user'));
+        return view('admin/edit',compact('user','userrole'));
     }
 
     public function update(Request $request, $id){
