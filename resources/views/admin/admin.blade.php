@@ -4,7 +4,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h1>Users Table</h1>
+            <h1><b>Admin Table</b></h1>
             @if ($message = Session::get('success'))
             <div class="alert alert-success mt-4" style="margin-right: 30%; margin-left: 30%;" role="alert">
                 <strong>{{  $message}}</strong>

@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <p class="lead">Update User</p>
+                    <h2 class="lead"><b>Update User</b></h2>
                 </div>
                 <div class="body">
                     <form class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}">

@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="header">
-                        <p class="lead">Add User</p>
+                        <h2 class="lead"><b>Add User</b></h2>
                     </div>
                     <div class="body">
                         <form class="form-auth-small" method="POST" action="/user/store">
@@ -61,7 +61,7 @@
                                     <span class="text-danger"><b>{{ $errors->first('date_of_birth') }}</b></span>
                                 @endif
                             </div>
-{{--
+
                             <div class="form-group c_form_group">
                                 <label>Image</label>
                                 <input type="file" name="image" class="form-control"
@@ -69,7 +69,7 @@
                                 @if ($errors->has('image'))
                                     <span class="text-danger"><b>{{ $errors->first('image') }}</span>
                                 @endif
-                            </div> --}}
+                            </div>
                             <div class="form-group c_form_group">
                                 <label>Email</label>
                                 <input type="email" name="email" class="form-control"
