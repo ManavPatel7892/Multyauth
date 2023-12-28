@@ -12,7 +12,7 @@
                     <h2 class="lead"><b>Update User</b></h2>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}">
+                    <form class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>Username</label>
@@ -43,7 +43,7 @@
                         <div class="form-group c_form_group">
                             <label>Select Gander</label>
                             <select name="gender" class="form-control">
-                                <option selected>Select</option>
+                                <option selected disabled>Select</option>
                                 <option value="male"  <?php  echo ($user->gender == 'male') ? 'selected': '';?>>Male</option>
                                 <option value="female" <?php  echo ($user->gender == 'female') ? 'selected': '';?>>Female</option>
                             </select>

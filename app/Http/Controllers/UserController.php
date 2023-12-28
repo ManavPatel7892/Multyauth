@@ -38,13 +38,13 @@ class UserController extends Controller
             'role' => 'required',
             'gender' => 'required',
             'date_of_birth' => 'required',
-            // 'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
+            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        // $imageName = time().'.'.$request->image->extension();
-        // $request->image->move(public_path('userImage'),$imageName);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'),$imageName);
 
         $user = new User;
         $user->name = $request->name;
@@ -52,7 +52,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->gender = $request->gender;
         $user->date_of_birth = $request->date_of_birth;
-        // $user->image = $imageName;
+        $user->image = $imageName;
         $user->email = $request->email;
         $user->password = $request->password;
 
@@ -75,18 +75,18 @@ class UserController extends Controller
             'role' => 'required',
             'gender' => 'required',
             'date_of_birth' => 'required',
-            // 'image' => 'required',
+            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
             'email' => 'required',
             // 'password' => 'required',
         ]);
 
         $user = User::where('id',$id)->first();
 
-        // if(isset($request->image)){
-        //     $imageName = time().'.'.$request->image->extension();
-        //     $request->image->move(public_path('userImage'),$imageName);
-        //     $user->image = $imageName;
-        // }
+        if(isset($request->image)){
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'),$imageName);
+            $user->image = $imageName;
+        }
 
         $user->name = $request->name;
         $user->last_name = $request->last_name;
