@@ -12,7 +12,7 @@
                     <h2 class="lead"><b>Update Admin</b></h2>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" method="POST" action="/admin/update/{{ $user->id }}">
+                    <form class="form-auth-small" method="POST" action="/admin/update/{{ $user->id }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>Username</label>

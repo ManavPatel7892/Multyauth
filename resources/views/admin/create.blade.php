@@ -13,7 +13,7 @@
                     <h2 class="lead"><b>Add Admin</b></h2>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" method="POST" action="/admin/store">
+                    <form class="form-auth-small" method="POST" action="/admin/store" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>Username</label>
@@ -61,7 +61,7 @@
                                 <span class="text-danger"><b>{{ $errors->first('date_of_birth') }}</b></span>
                             @endif
                         </div>
-{{--
+
                         <div class="form-group c_form_group">
                             <label>Image</label>
                             <input type="file" name="image" class="form-control"
@@ -69,7 +69,7 @@
                             @if ($errors->has('image'))
                                 <span class="text-danger"><b>{{ $errors->first('image') }}</span>
                             @endif
-                        </div> --}}
+                        </div>
                         <div class="form-group c_form_group">
                             <label>Email</label>
                             <input type="email" name="email" class="form-control"

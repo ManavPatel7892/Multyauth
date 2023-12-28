@@ -13,7 +13,7 @@
                         <h2 class="lead"><b>Add User</b></h2>
                     </div>
                     <div class="body">
-                        <form class="form-auth-small" method="POST" action="/user/store">
+                        <form class="form-auth-small" method="POST" action="/user/store" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group c_form_group">
                                 <label>Username</label>
