@@ -34,7 +34,7 @@
                         @foreach ($admin as $admin)
                         <tr>
                             <td>{{ $admin->id }}</td>
-                            <td><img src="/userImage/{{ $admin->image }}" class="rounded-circle" width="80" height="80"></td>
+                            <td><img src="/images/{{ $admin->image }}" class="rounded-circle" width="80" height="80"></td>
                             <td>{{ $admin->name }}</td>
                             <td>{{ $admin->last_name }}</td>
                             <td>{{ $admin->gender }}</td>
