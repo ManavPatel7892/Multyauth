@@ -75,7 +75,7 @@ class UserController extends Controller
             'role' => 'required',
             'gender' => 'required',
             'date_of_birth' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
+            'image' => 'nullable|mimes:png,jpg,jpeg,gif|max:10000',
             'email' => 'required',
             // 'password' => 'required',
         ]);
