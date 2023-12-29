@@ -34,7 +34,7 @@
                             <div class="form-group c_form_group">
                                 <label>Select Role</label>
                                 <select name="role" class="form-control">
-                                    <option selected>Select</option>
+                                    <option selected disabled>Select</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
@@ -45,7 +45,7 @@
                             <div class="form-group c_form_group">
                                 <label>Select Gander</label>
                                 <select name="gender" class="form-control">
-                                    <option selected>Select</option>
+                                    <option selected disabled>Select</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
