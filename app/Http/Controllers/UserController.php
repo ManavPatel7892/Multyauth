@@ -125,7 +125,7 @@ class UserController extends Controller
         $excelData = implode("\t", array_values($fields)) . "\n";
 
         // Fetch records from database
-        $query = User::all();
+        $query = User::where('role', '=', 'user')->get();;
         // echo $query;exit;
         foreach ($query as $row) {
             $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);

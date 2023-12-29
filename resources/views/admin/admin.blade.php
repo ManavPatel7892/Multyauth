@@ -11,7 +11,7 @@
             </div>
             @endif
             <div class="text-right" style="float: center">
-                <a type="button" href="{{ ('export-user') }}" class="btn btn-outline-success">Export User</a>
+                <a type="button" href="{{ ('export-admin') }}" class="btn btn-outline-success">Export Admin</a>
                 <a type="button" href="/admin/create" class="btn btn-outline-secondary">New Admin</a>
             </div>
 
