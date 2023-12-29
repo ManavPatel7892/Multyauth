@@ -32,7 +32,7 @@
                         <div class="form-group c_form_group">
                             <label>Select Role</label>
                             <select name="role" class="form-control">
-                                <option selected>Select</option>
+                                <option selected disabled>Select</option>
                                 <option value="admin" <?php  echo ($user->role == 'admin') ? 'selected': '';?>>Admin</option>
                                 <option value="user" <?php  echo ($user->role == 'user') ? 'selected': '';?>>User</option>
                             </select>
