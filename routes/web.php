@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/delete/{id}', [AdminController::class,'delete']);
 
     Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
+    Route::get('/export-admin', [AdminController::class,'exportAdmin'])->name('export-admin');
 
 
 });

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,27 +13,30 @@ class AdminController extends Controller
     {
         $user_id = Auth::user()->id;
         $users = User::where('id', $user_id)->get();
-       $userrole= $users[0]['role'];
+        $userrole = $users[0]['role'];
         $admin = User::where('role', '=', 'admin')->get();
-        return view('admin/admin', compact('admin','userrole'));
+        return view('admin/admin', compact('admin', 'userrole'));
     }
 
-    public function dashboard(){
+    public function dashboard()
+    {
         $user_id = Auth::user()->id;
         $users = User::where('id', $user_id)->get();
-       $userrole= $users[0]['role'];
-        return view('dashboard',compact('userrole'));
+        $userrole = $users[0]['role'];
+        return view('dashboard', compact('userrole'));
     }
 
 
-    public function create(){
+    public function create()
+    {
         $user_id = Auth::user()->id;
         $users = User::where('id', $user_id)->get();
-       $userrole= $users[0]['role'];
-        return view('admin/create',compact('userrole'));
+        $userrole = $users[0]['role'];
+        return view('admin/create', compact('userrole'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // dd($request->all());
         $request->validate([
             'name' => 'required',
@@ -45,8 +49,8 @@ class AdminController extends Controller
             'password' => 'required',
         ]);
 
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'),$imageName);
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
 
         $user = new User;
         $user->name = $request->name;
@@ -62,15 +66,17 @@ class AdminController extends Controller
         return redirect('/admin')->withSuccess('New Admin Submited !!!');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $user_id = Auth::user()->id;
         $users = User::where('id', $user_id)->get();
-       $userrole= $users[0]['role'];
-        $user = User::where('id',$id)->first();
-        return view('admin/edit',compact('user','userrole'));
+        $userrole = $users[0]['role'];
+        $user = User::where('id', $id)->first();
+        return view('admin/edit', compact('user', 'userrole'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required',
             'last_name' => 'required',
@@ -82,11 +88,11 @@ class AdminController extends Controller
             // 'password' => 'required',
         ]);
 
-        $user = User::where('id',$id)->first();
+        $user = User::where('id', $id)->first();
 
-        if(isset($request->image)){
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('images'),$imageName);
+        if (isset($request->image)) {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
             $user->image = $imageName;
         }
 
@@ -101,9 +107,39 @@ class AdminController extends Controller
         return redirect('/admin')->withSuccess('Admin Updated !!!');
     }
 
-    public function delete($id){
-        $user = User::where('id',$id)->first();
+    public function delete($id)
+    {
+        $user = User::where('id', $id)->first();
         $user->delete();
         return redirect('/admin')->withSuccess('Admin Deleted !!!');
+    }
+    public function exportAdmin()
+    {
+
+        // Excel file name for download
+        $fileName = "admin-data_" . date('d-m-Y') . ".csv";
+
+        // Column names
+        $fields = array('ID', 'ROLE', 'FIRST NAME', 'LAST NAME', 'GENDER', 'DOB', 'IMAGE', 'EMAIl', 'PASS');
+
+        // Display column names as first row
+        $excelData = implode("\t", array_values($fields)) . "\n";
+
+        // Fetch records from database
+        $query = User::where('role', '=', 'admin')->get();
+        // echo $query;exit;
+        foreach ($query as $row) {
+            $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);
+            // array_walk($lineData, 'filterData');
+            $excelData .= implode("\t", array_values($lineData)) . "\n";
+        }
+
+
+        // Headers for download
+        header("Content-Type: application/vnd.ms-excel");
+        header("Content-Disposition: attachment; filename=\"$fileName\"");
+
+        // Render excel data
+        echo $excelData;
     }
 }
