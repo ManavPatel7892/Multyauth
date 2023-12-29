@@ -25,9 +25,15 @@ use App\Http\Controllers\AdminController;
 Route::middleware('auth')->group(function () {
     Route::get('/', [UserController::class, 'dashboard']);
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+    Route::get('profile/edit', [ProfileController::class,'edit'])->name('profile.edit');
+    Route::post('profile/update', [ProfileController::class,'update'])->name("profile.update");
+
 
     Route::get('/user', [UserController::class, 'user'])->name('user');
     Route::get('user/create', [UserController::class,'create'])->name('user.create');
