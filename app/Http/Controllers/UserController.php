@@ -115,30 +115,26 @@ class UserController extends Controller
     public function exportUser()
     {
 
-        // Excel file name for download
-        $fileName = "users-data_" . date('d-m-Y') . ".csv";
+        $delimiter = ",";
+        $filename = "users-data_" . date('d-m-Y') . ".csv";
 
-        // Column names
+        $f = fopen('php://memory', 'w');
+
+
         $fields = array('ID', 'ROLE', 'FIRST NAME', 'LAST NAME', 'GENDER', 'DOB', 'IMAGE', 'EMAIl', 'PASS');
+        fputcsv($f, $fields, $delimiter);
 
-        // Display column names as first row
-        $excelData = implode("\t", array_values($fields)) . "\n";
-
-        // Fetch records from database
         $query = User::where('role', '=', 'user')->get();;
-        // echo $query;exit;
         foreach ($query as $row) {
-            $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);
-            // array_walk($lineData, 'filterData');
-            $excelData .= implode("\t", array_values($lineData)) . "\n";
-        }
+                $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);
+                fputcsv($f, $lineData, $delimiter);
+            }
 
+        fseek($f, 0);
 
-        // Headers for download
-        header("Content-Type: application/vnd.ms-excel");
-        header("Content-Disposition: attachment; filename=\"$fileName\"");
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
 
-        // Render excel data
-        echo $excelData;
+        fpassthru($f);
     }
 }
