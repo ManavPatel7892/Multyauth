@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::post('admin/update/{id}', [AdminController::class,'update']);
     Route::get('admin/delete/{id}', [AdminController::class,'delete']);
 
+    Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
+
+
 });
 
 require __DIR__.'/auth.php';
