@@ -11,6 +11,7 @@
             </div>
             @endif
             <div class="text-right" style="float: center">
+                <a type="button" href="{{ ('downloadPdf') }}" class="btn btn-outline-warning">Download Pdf</a>
                 <a type="button" href="{{ ('export-user') }}" class="btn btn-outline-success">Export User</a>
                 <a type="button" href="/user/create" class="btn btn-outline-secondary">New User</a>
             </div>
