@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -136,5 +137,12 @@ class UserController extends Controller
         header('Content-Disposition: attachment; filename="' . $filename . '";');
 
         fpassthru($f);
+    }
+    public function downloadPdf() {
+        $users = User::where('role', '=', 'user')->get();
+        $data['users'] = $users;
+        $pdf = Pdf::loadView('pdf.generatePdf',$data);
+        return $pdf->stream();
+        // return $pdf->download('users.pdf');
     }
 }

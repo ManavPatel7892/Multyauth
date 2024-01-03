@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
     Route::get('/export-admin', [AdminController::class,'exportAdmin'])->name('export-admin');
 
+    Route::get('/downloadPdf', [UserController::class,'downloadPdf'])->name('downloadPdf');
 
 });
 
