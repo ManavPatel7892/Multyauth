@@ -61,20 +61,23 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
 
-        // $user->save();
+        $user->save();
         $date_of_birth = date_create($request->date_of_birth);
         $bod = date_format($date_of_birth,"d-M-Y");
-        $data['users'] = [
-            'id' => 'id',
-            'name' => 'name',
-            'last_name' => 'last_name',
-            'gender' => 'gender',
-            'date_of_birth' => 'date_of_birth',
-            'email' => 'email',
+        $data = [
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $bod,
+            'email' => $request->email,
         ];
-        $pdf = Pdf::loadView('pdf.generatePdf2',$data);
-        $pdf->download('users.pdf');
-        return redirect('/user')->withSuccess('New User Submited !!!');
+        // return redirect('/user')->withSuccess('New User Submited !!!');
+
+        $pdf = PDF::loadView('pdf.generatePdf2', compact('data'));
+
+        $pdf->save(public_path('pdfs/user_information.pdf'));
+
+        return redirect()->route('user')->withSuccess('New User Submited !!!');
     }
 
     public function edit($id)
@@ -150,6 +153,7 @@ class UserController extends Controller
 
         fpassthru($f);
     }
+
     public function downloadPdf() {
         $users = User::where('role', '=', 'user')->get();
         $data['users'] = $users;
