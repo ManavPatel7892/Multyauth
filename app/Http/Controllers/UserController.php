@@ -61,7 +61,19 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
 
-        $user->save();
+        // $user->save();
+        $date_of_birth = date_create($request->date_of_birth);
+        $bod = date_format($date_of_birth,"d-M-Y");
+        $data['users'] = [
+            'id' => 'id',
+            'name' => 'name',
+            'last_name' => 'last_name',
+            'gender' => 'gender',
+            'date_of_birth' => 'date_of_birth',
+            'email' => 'email',
+        ];
+        $pdf = Pdf::loadView('pdf.generatePdf2',$data);
+        $pdf->download('users.pdf');
         return redirect('/user')->withSuccess('New User Submited !!!');
     }
 
@@ -142,7 +154,7 @@ class UserController extends Controller
         $users = User::where('role', '=', 'user')->get();
         $data['users'] = $users;
         $pdf = Pdf::loadView('pdf.generatePdf',$data);
-        return $pdf->stream();
-        // return $pdf->download('users.pdf');
+        // return $pdf->stream('users.pdf');
+        return $pdf->download('users.pdf');
     }
 }
