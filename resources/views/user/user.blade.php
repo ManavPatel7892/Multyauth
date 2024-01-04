@@ -50,7 +50,8 @@
 
                                 <a href="/user/delete/{{ $user->id }}" class="btn btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
-                                <a type="button" href="{{ asset('pdfs/user_information.pdf') }}" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+                                <a href="{{ asset('pdfs/user_information.pdf') }}" target="_blank" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
+
                             </td>
                         </tr>
                         @endforeach
