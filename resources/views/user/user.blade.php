@@ -46,9 +46,11 @@
                             <td><?php echo date_format($date_of_birth,"d-M-Y");?></td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <a href="/user/edit/{{ $user->id }}" class="btn btn-outline-secondary btn-md">Edit</a>
+                                <a href="/user/edit/{{ $user->id }}" class="btn btn-outline-secondary btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                <a href="/user/delete/{{ $user->id }}" class="btn btn-outline-danger btn-md">Delete</a>
+                                <a href="/user/delete/{{ $user->id }}" class="btn btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                <a type="button" href="{{ asset('pdfs/user_information.pdf') }}" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         @endforeach

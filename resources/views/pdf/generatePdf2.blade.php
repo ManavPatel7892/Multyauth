@@ -16,7 +16,6 @@
     <table border="1" cellpadding="0" cellspacing="0">
         <thead>
             <tr align="left">
-                <th scope="row">No.</th>
                 <th>Name</th>
                 <th>Last Name</th>
                 <th>Gender</th>
@@ -26,12 +25,11 @@
         </thead>
         <tbody>
             <tr align="left">
-                <td>{{ $users['id'] }}</td>
-                <td>{{ $users['name'] }}</td>
-                <td>{{ $users['last_name'] }}</td>
-                <td>{{ $users['gender'] }}</td>
-                <td>{{ $users['date_of_birth'] }}</td>
-                <td>{{ $users['email'] }}</td>
+                <td>{{ $data['name'] }}</td>
+                <td>{{ $data['last_name'] }}</td>
+                <td>{{ $data['gender'] }}</td>
+                <td>{{ $data['date_of_birth'] }}</td>
+                <td>{{ $data['email'] }}</td>
             </tr>
         </tbody>
     </table>
