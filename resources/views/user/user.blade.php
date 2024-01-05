@@ -19,7 +19,7 @@
         </div>
         <div class="body">
             <div class="table-responsive ">
-                <table class="table  table-hover">
+                <table id="myTable" class="table  table-hover">
                     <thead>
                         <tr>
                             <th scope="row">No.</th>
