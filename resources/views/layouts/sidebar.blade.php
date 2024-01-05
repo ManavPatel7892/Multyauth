@@ -45,11 +45,13 @@
                         @endphp
                 <li><a href="{{ route('admin') }}"><i class="fa fa-address-book"></i><span>Admin</span></a></li>
                 <li><a href="{{ route('user') }}"><i class="fa fa-comments"></i> <span>Users</span></a></li>
+                <li><a href="{{ route('product') }}"><i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Product</span></a></li>
                  @php }
                         else if($userrole=='admin')
                         {
                             @endphp
                 <li><a href="{{ route('user') }}"><i class="fa fa-comments"></i> <span>Users</span></a></li>
+                <li><a href="{{ route('product') }}"><i class="fa fa-product-hunt" aria-hidden="true"></i> <span>Product</span></a></li>
                 <?php
                         }
                         else

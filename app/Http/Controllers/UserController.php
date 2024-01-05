@@ -11,12 +11,6 @@ class UserController extends Controller
 {
     public function user()
     {
-        // $user = Auth::user();
-
-
-        // $users = User::where('id', $user->id)->first();
-
-
         $users = User::where('role', '=', 'user')->get();
         return view('user.user', compact('users'));
     }
