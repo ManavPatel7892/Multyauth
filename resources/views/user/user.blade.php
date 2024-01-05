@@ -36,7 +36,7 @@
                         @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            {{-- <td><img src="{{url('/images/'.$user->image )}}" class="rounded-circle" width="80" height="80"></td> --}}
+                            <td><img src="{{url('/images/'.$user->image )}}" class="rounded-circle" width="80" height="80"></td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->last_name }}</td>
                             <td>{{ $user->gender }}</td>
