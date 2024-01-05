@@ -11,27 +11,26 @@ class UserController extends Controller
 {
     public function user()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
+        // $user = Auth::user();
+
+
+        // $users = User::where('id', $user->id)->first();
+
+
         $users = User::where('role', '=', 'user')->get();
-        return view('user/user', compact('users', 'userrole'));
+        return view('user.user', compact('users'));
     }
 
     public function dashboard()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
-        return view('dashboard', compact('userrole'));
+
+        return view('dashboard');
     }
 
     public function create()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
-        return view('user/create', compact('userrole'));
+
+        return view('user.create');
     }
 
     public function store(Request $request)
@@ -60,8 +59,8 @@ class UserController extends Controller
         $user->image = $imageName;
         $user->email = $request->email;
         $user->password = $request->password;
-
         $user->save();
+
         $date_of_birth = date_create($request->date_of_birth);
         $bod = date_format($date_of_birth,"d-M-Y");
         $data = [
@@ -82,11 +81,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
+
         $user = User::where('id', $id)->first();
-        return view('user/edit', compact('user', 'userrole'));
+        return view('user.edit', compact('user'));
     }
 
     public function update(Request $request, $id)

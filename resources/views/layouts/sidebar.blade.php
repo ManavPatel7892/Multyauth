@@ -39,15 +39,16 @@
         <nav id="left-sidebar-nav" class="sidebar-nav">
             <ul id="main-menu" class="metismenu animation-li-delay">
                 <li class="header">Main</li>
-                <?php
-
-                        if($userrole=='superadmin')
-                        { ?>
+                @php
+                    $userrole = Auth::user()->role;
+                        if($userrole=='superadmin'){
+                        @endphp
                 <li><a href="{{ route('admin') }}"><i class="fa fa-address-book"></i><span>Admin</span></a></li>
                 <li><a href="{{ route('user') }}"><i class="fa fa-comments"></i> <span>Users</span></a></li>
-                <?php  }
+                 @php }
                         else if($userrole=='admin')
-                        {?>
+                        {
+                            @endphp
                 <li><a href="{{ route('user') }}"><i class="fa fa-comments"></i> <span>Users</span></a></li>
                 <?php
                         }
