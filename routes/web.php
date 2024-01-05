@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::get('user/edit/{id}', [UserController::class,'edit']);
     Route::post('user/update/{id}', [UserController::class,'update']);
     Route::get('user/delete/{id}', [UserController::class,'delete']);
+    Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
+    Route::get('/downloadPdf', [UserController::class,'downloadPdf'])->name('downloadPdf');
 
 
     Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
@@ -49,11 +52,20 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/edit/{id}', [AdminController::class,'edit']);
     Route::post('admin/update/{id}', [AdminController::class,'update']);
     Route::get('admin/delete/{id}', [AdminController::class,'delete']);
-
-    Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
     Route::get('/export-admin', [AdminController::class,'exportAdmin'])->name('export-admin');
+    Route::get('/downloadPdf2', [AdminController::class,'downloadPdf2'])->name('downloadPdf2');
 
-    Route::get('/downloadPdf', [UserController::class,'downloadPdf'])->name('downloadPdf');
+
+    Route::get('/product', [ProductController::class, 'product'])->name('product');
+    Route::get('product/create', [ProductController::class,'create'])->name('product.create');
+    Route::post('product/store', [ProductController::class,'store'])->name('product.store');
+    Route::get('product/edit/{id}', [ProductController::class,'edit']);
+    Route::post('product/update/{id}', [ProductController::class,'update']);
+    Route::get('product/delete/{id}', [ProductController::class,'delete']);
+    Route::get('/export-product', [ProductController::class,'exportProduct'])->name('export-product');
+    Route::get('/downloadPdf3', [ProductController::class,'downloadPdf3'])->name('downloadPdf3');
+
+
 
 });
 

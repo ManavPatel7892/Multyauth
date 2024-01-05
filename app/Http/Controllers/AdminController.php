@@ -6,33 +6,27 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminController extends Controller
 {
     public function admin()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
         $admin = User::where('role', '=', 'admin')->get();
-        return view('admin/admin', compact('admin', 'userrole'));
+        return view('admin/admin', compact('admin'));
     }
 
     public function dashboard()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
-        return view('dashboard', compact('userrole'));
+
+        return view('dashboard');
     }
 
 
     public function create()
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
-        return view('admin/create', compact('userrole'));
+
+        return view('admin.create');
     }
 
     public function store(Request $request)
@@ -63,16 +57,28 @@ class AdminController extends Controller
         $user->password = $request->password;
 
         $user->save();
-        return redirect('/admin')->withSuccess('New Admin Submited !!!');
+        // return redirect('/admin')->withSuccess('New Admin Submited !!!');
+        $date_of_birth = date_create($request->date_of_birth);
+        $bod = date_format($date_of_birth,"d-M-Y");
+        $data = [
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'gender' => $request->gender,
+            'date_of_birth' => $bod,
+            'email' => $request->email,
+        ];
+        $pdf = PDF::loadView('pdf.generatePdf2', compact('data'));
+
+        $pdf->save(public_path('pdfs/admin_information.pdf'));
+
+        return redirect()->route('admin')->withSuccess('New Admin Submited !!!');
     }
 
     public function edit($id)
     {
-        $user_id = Auth::user()->id;
-        $users = User::where('id', $user_id)->get();
-        $userrole = $users[0]['role'];
+
         $user = User::where('id', $id)->first();
-        return view('admin/edit', compact('user', 'userrole'));
+        return view('admin.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
@@ -137,5 +143,12 @@ class AdminController extends Controller
         header('Content-Disposition: attachment; filename="' . $filename . '";');
 
         fpassthru($f);
+    }
+    public function downloadPdf2() {
+        $users = User::where('role', '=', 'admin')->get();
+        $data['users'] = $users;
+        $pdf = Pdf::loadView('pdf.generatePdf',$data);
+        // return $pdf->stream('users.pdf');
+        return $pdf->download('admin.pdf');
     }
 }
