@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('main-section')
 @if ($message = Session::get('success'))
     <div class="alert alert-success mt-4" style="margin-right: 30%; margin-left: 30%;" role="alert">
         <strong>{{ $message }}</strong>
@@ -93,3 +94,4 @@
         </div>
     </div>
 </div>
+@endsection
