@@ -24,7 +24,13 @@
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/mooli.min.css') }}">
-
+<style>
+    .error{
+        color: red;
+        border-color: red;
+        font-weight: 900;
+    }
+</style>
 </head>
 <body>
 
@@ -33,4 +39,4 @@
 @yield('main-section')
 
 @include('layouts.footer')
-{{-- @yield('page-script') --}}
+@yield('page-script')

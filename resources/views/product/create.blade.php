@@ -14,31 +14,22 @@
                     <h2 class="lead"><b>Add Product</b></h2>
                 </div>
                 <div class="body">
-                    <form class="form-auth-small" method="POST" action="/product/store" enctype="multipart/form-data">
+                    <form id="product-form" class="form-auth-small" method="POST" action="/product/store" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>ProductName</label>
                             <input type="text" name="name" class="form-control"
                                 placeholder="Enter your ProductName" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                                <span class="text-danger"><b>{{ $errors->first('name') }}</b></span>
-                            @endif
                         </div>
                         <div class="form-group c_form_group">
                             <label>Description</label>
                             <input type="text" name="description" class="form-control"
                                 placeholder="Enter your Last Name" value="{{ old('description') }}">
-                            @if ($errors->has('description'))
-                                <span class="text-danger"><b>{{ $errors->first('description') }}</b></span>
-                            @endif
                         </div>
                         <div class="form-group c_form_group">
                             <label>Image</label>
                             <input type="file" name="image" class="form-control"
                                 placeholder="Enter your Image" value="{{ old('image') }}">
-                            @if ($errors->has('image'))
-                                <span class="text-danger"><b>{{ $errors->first('image') }}</span>
-                            @endif
                         </div>
                         <button type="submit" class="btn btn-dark btn-lg btn-block">Submit</button>
                     </form>
@@ -47,4 +38,37 @@
         </div>
     </div>
 </div>
+@endsection
+@section('page-script')
+<script>
+$('#product-form').validate({
+    rules:{
+        name:{
+            required: true,
+        },
+        description:{
+            required: true,
+        },
+        image:{
+            required: true,
+        },
+
+    },
+    messages: {
+        name:{
+            required: "Please enter your User Name"
+        },
+        description:{
+            required: "Please enter your Description"
+        },
+        image:{
+            required: "Please enter your Image"
+        },
+
+    },
+    submitHandler: function(form){
+        form.submit();
+    }
+});
+</script>
 @endsection
