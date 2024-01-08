@@ -31,17 +31,7 @@ class AdminController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'role' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -83,16 +73,6 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'role' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'required',
-            'image' => 'nullable|mimes:png,jpg,jpeg,gif|max:10000',
-            'email' => 'required',
-            // 'password' => 'required',
-        ]);
 
         $user = User::where('id', $id)->first();
 

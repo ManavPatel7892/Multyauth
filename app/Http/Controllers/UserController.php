@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -29,17 +30,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'role' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
-            'email' => 'required',
-            'password' => 'required',
-        ]);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -70,7 +60,7 @@ class UserController extends Controller
 
         $pdf->save(public_path('pdfs/user_information.pdf'));
 
-        return redirect()->route('user')->withSuccess('New User Submited !!!');
+        return redirect()->route('user')->withSuccess('User Added Successfully');
     }
 
     public function edit($id)
@@ -82,16 +72,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'role' => 'required',
-            'gender' => 'required',
-            'date_of_birth' => 'required',
-            'image' => 'nullable|mimes:png,jpg,jpeg,gif|max:10000',
-            'email' => 'required',
-            // 'password' => 'required',
-        ]);
 
         $user = User::where('id', $id)->first();
 

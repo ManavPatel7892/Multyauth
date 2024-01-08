@@ -31,12 +31,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $request->validate([
-            'name' => 'required',
 
-            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
-            'description' => 'required',
-        ]);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -72,12 +67,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-
-            'image' => 'required|mimes:png,jpg,jpeg,gif|max:10000',
-            'description' => 'required',
-        ]);
 
         $products = Product::where('id', $id)->first();
 
