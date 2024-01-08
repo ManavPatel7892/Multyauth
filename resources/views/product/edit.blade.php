@@ -54,7 +54,7 @@ $('#product-edit-form').validate({
     },
     messages: {
         name:{
-            required: "Please enter your User Name"
+            required: "Please enter your Product Name"
         },
         description:{
             required: "Please enter your Description"
