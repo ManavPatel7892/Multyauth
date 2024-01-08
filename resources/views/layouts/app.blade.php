@@ -25,7 +25,7 @@
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/mooli.min.css') }}">
 <style>
-    .error{
+    label.error{
         color: red;
         border-color: red;
         font-weight: 900;
