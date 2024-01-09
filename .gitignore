@@ -18,6 +18,9 @@ yarn-error.log
 /.idea
 /.vscode
 composer.lock
+
+*.jpg
+
 public/images/1703770569.jpg
 public/images/1703770583.jpg
 public/images/1703823266.jpg
@@ -27,3 +30,4 @@ public/images/1703827913.jpg
 public/pdfs/user_information.pdf
 public/pdfs/user_information.pdf
 public/pdfs/user_information.pdf
+
