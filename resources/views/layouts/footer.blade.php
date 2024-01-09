@@ -28,5 +28,6 @@
         $('#myTable').DataTable();
     });
 </script> --}}
+
 </body>
 </html>
