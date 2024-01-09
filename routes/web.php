@@ -44,6 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('user/delete/{id}', [UserController::class,'delete']);
     Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
     Route::get('/downloadPdf', [UserController::class,'downloadPdf'])->name('downloadPdf');
+    Route::get('/data-table', [UserController::class, 'index'])->name('data-table.index');
+    Route::get('/data', [UserController::class, 'getData'])->name('data-table.data');
+    Route::get('/users',[UserController::class, 'index']);
 
 
 
@@ -65,6 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::get('product/delete/{id}', [ProductController::class,'delete']);
     Route::get('/export-product', [ProductController::class,'exportProduct'])->name('export-product');
     Route::get('/downloadPdf3', [ProductController::class,'downloadPdf3'])->name('downloadPdf3');
+    Route::post('/delete-multiple-records', [ProductController::class, 'deleteMultiple'])->name('deleteMultipleRecords');
+
 
 
 
