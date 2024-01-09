@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/users',[UserController::class, 'index']);
 
 
+
     Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
     Route::get('admin/create', [AdminController::class,'create'])->name('admin.create');
     Route::post('admin/store', [AdminController::class,'store'])->name('admin.store');
@@ -74,4 +75,4 @@ Route::middleware('auth')->group(function () {
 
 });
 
-require __DIR__.'/auth.php';
+ require __DIR__.'/auth.php';
