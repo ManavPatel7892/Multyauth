@@ -20,28 +20,13 @@
 <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
 
-<script>
+
+
+
+{{-- <script>
     $(document).ready(function() {
         $('#myTable').DataTable();
     });
-</script>
-{{-- <script>
-    $(document).ready(function () {
-        $('#myTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/items',
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'image', name: 'image' },
-                { data: 'name', name: 'name' },
-                { data: 'last_name', name: 'last_name' },
-                { data: 'gender', name: 'gender' },
-                { data: 'date_of_birth', name: 'date_of_birth' },
-                { data: 'email', name: 'email' },
-            ]
-        });
-    });
-</script> --}}
+
 </body>
 </html>

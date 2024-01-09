@@ -132,4 +132,9 @@ class UserController extends Controller
         // return $pdf->stream('users.pdf');
         return $pdf->download('users.pdf');
     }
+
+
+
+
+
 }
