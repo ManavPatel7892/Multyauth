@@ -10,10 +10,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h2 class="lead"><b>Update User</b></h2>
+                    <h2 class="lead"><b>Update Admin</b></h2>
                 </div>
                 <div class="body">
-                    <form id="user-edit-form" class="form-auth-small" method="POST" action="/user/update/{{ $user->id }}" enctype="multipart/form-data">
+                    <form id="admin-edit-form" class="form-auth-small" method="POST" action="/admin/update/{{ $user->id }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group c_form_group">
                             <label>Username</label>
@@ -66,7 +66,7 @@
 @endsection
 @section('page-script')
 <script>
-$('#user-edit-form').validate({
+$('#admin-edit-form').validate({
     rules:{
         name:{
             required: true,
@@ -90,6 +90,10 @@ $('#user-edit-form').validate({
             required:true,
             email:true,
         },
+        password:{
+            required:true,
+        },
+
     },
     messages: {
         name:{
@@ -113,6 +117,10 @@ $('#user-edit-form').validate({
         email:{
             required: "Please enter your email"
         },
+        password:{
+            required: "Please enter your Password"
+        },
+
     },
     submitHandler: function(form){
         form.submit();
