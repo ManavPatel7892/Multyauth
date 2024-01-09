@@ -54,6 +54,15 @@
                         <li data-theme="amethyst">
                             <div class="amethyst"></div>
                         </li>
+                        <li data-theme="amethyst">
+                            <div class="amethyst"></div>
+                        </li>
+                        <li data-theme="amethyst">
+                            <div class="amethyst"></div>
+                        </li>
+                        <li data-theme="amethyst">
+                            <div class="amethyst"></div>
+                        </li>
                     </ul>
                 </li>
                 <li class="list-group-item d-flex align-items-center justify-content-between">
@@ -127,6 +136,9 @@
                 </div>
             </div>
             <div class="animate_lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
                 <div class="line"></div>
                 <div class="line"></div>
                 <div class="line"></div>
