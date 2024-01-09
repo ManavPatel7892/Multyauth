@@ -23,7 +23,7 @@
                         <form method="post" action="{{ route('deleteMultipleRecords') }}" id="deleteForm">
                             @csrf
                             <div class="table-responsive ">
-                                <table class="table  table-hover">
+                                <table id="myTable" class="table  table-hover">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="select-all"></th>
