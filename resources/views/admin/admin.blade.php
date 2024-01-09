@@ -49,7 +49,7 @@
                             <td>
                                 <a href="/admin/edit/{{ $admin->id }}" class="btn btn-outline-secondary btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                <a href="/admin/delete/{{ $admin->id }}" class="btn btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a href="/admin/delete/{{ $admin->id }}" class="btn btn-outline-danger btn-md" onclick="return confirm('Are you sure to delete this ?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
                                 <a href="{{ asset('pdfs/admin_information.pdf') }}" target="_blank" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
                             </td>
