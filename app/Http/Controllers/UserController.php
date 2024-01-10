@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\Datatables;
 
 class UserController extends Controller
 {
@@ -46,7 +47,7 @@ class UserController extends Controller
         $user->save();
 
         $date_of_birth = date_create($request->date_of_birth);
-        $bod = date_format($date_of_birth,"d-M-Y");
+        $bod = date_format($date_of_birth, "d-M-Y");
         $data = [
             'name' => $request->name,
             'last_name' => $request->last_name,
@@ -113,9 +114,9 @@ class UserController extends Controller
 
         $query = User::where('role', '=', 'user')->get();;
         foreach ($query as $row) {
-                $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);
-                fputcsv($f, $lineData, $delimiter);
-            }
+            $lineData = array($row['id'], $row['role'], $row['name'], $row['last_name'], $row['gender'], $row['date_of_birth'], $row['image'], $row['email'], $row['password']);
+            fputcsv($f, $lineData, $delimiter);
+        }
 
         fseek($f, 0);
 
@@ -125,16 +126,30 @@ class UserController extends Controller
         fpassthru($f);
     }
 
-    public function downloadPdf() {
+    public function downloadPdf()
+    {
         $users = User::where('role', '=', 'user')->get();
         $data['users'] = $users;
-        $pdf = Pdf::loadView('pdf.generatePdf',$data);
+        $pdf = Pdf::loadView('pdf.generatePdf', $data);
         // return $pdf->stream('users.pdf');
         return $pdf->download('users.pdf');
     }
 
 
+    public function userDatatable(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::where('role', '=', 'user')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/user/edit/'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="/user/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
-
-
+        return view('user.user');
+    }
 }

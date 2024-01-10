@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Yajra\DataTables\Facades\Datatables;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -130,5 +130,23 @@ class AdminController extends Controller
         $pdf = Pdf::loadView('pdf.generatePdf',$data);
         // return $pdf->stream('users.pdf');
         return $pdf->download('admin.pdf');
+    }
+
+    public function adminDatatable(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = User::where('role', '=', 'admin')->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/admin/edit/'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="/admin/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.admin');
     }
 }
