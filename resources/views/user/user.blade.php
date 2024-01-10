@@ -20,42 +20,18 @@
         </div>
         <div class="body">
             <div class="table-responsive ">
-                <table id="myTable" class="table  table-hover">
+                <table id="DataTables_Table_0" class="table data-table table-hover">
                     <thead>
                         <tr>
                             <th scope="row">No.</th>
-                            <th>Image</th>
                             <th>Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
-                            <th>Date Of Birth</th>
                             <th>email</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td><img src="{{url('/images/'.$user->image )}}" class="rounded-circle" width="80" height="80"></td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->last_name }}</td>
-                            <td>{{ $user->gender }}</td>
-                            <?php
-                              $date_of_birth = date_create($user->date_of_birth);
-                            ?>
-                            <td><?php echo date_format($date_of_birth,"d-M-Y");?></td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                <a href="/user/edit/{{ $user->id }}" class="btn btn-outline-secondary btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                <a href="/user/delete/{{ $user->id }}" class="btn btn-outline-danger btn-md"><i class="fa fa-trash" aria-hidden="true"></i></a>
-
-                                <a href="{{ asset('pdfs/user_information.pdf') }}" target="_blank" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>
-
-                            </td>
-                        </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -64,4 +40,25 @@
 </div>
     </div>
 </div>
+@endsection
+@section('page-script')
+<script type="text/javascript">
+    $(function () {
+
+      var table = $('.data-table').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('user.user') }}",
+          columns: [
+              {data: 'id', name: 'id'},
+              {data: 'name', name: 'name'},
+              {data: 'last_name', name: 'last_name'},
+              {data: 'gender', name: 'gender'},
+              {data: 'email', name: 'email'},
+              {data: 'action', name: 'action', orderable: false, searchable: false},
+          ]
+      });
+
+    });
+  </script>
 @endsection

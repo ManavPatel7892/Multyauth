@@ -44,10 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('user/delete/{id}', [UserController::class,'delete']);
     Route::get('/export-user', [UserController::class,'exportUser'])->name('export-user');
     Route::get('/downloadPdf', [UserController::class,'downloadPdf'])->name('downloadPdf');
-    Route::get('/data-table', [UserController::class, 'index'])->name('data-table.index');
-    Route::get('/data', [UserController::class, 'getData'])->name('data-table.data');
-    Route::get('/users',[UserController::class, 'index']);
-
+    Route::get('/users', [UserController::class, 'userDatatable'])->name('user.user');
 
 
     Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
@@ -58,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/delete/{id}', [AdminController::class,'delete']);
     Route::get('/export-admin', [AdminController::class,'exportAdmin'])->name('export-admin');
     Route::get('/downloadPdf2', [AdminController::class,'downloadPdf2'])->name('downloadPdf2');
+    Route::get('/admins', [AdminController::class, 'adminDatatable'])->name('admin.admin');
 
 
     Route::get('/product', [ProductController::class, 'product'])->name('product');
