@@ -34,7 +34,13 @@ class UserController extends Controller
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-
+        $randomNumber = rand();
+        $min = 1;
+        $max = 500;
+        $randomNumber = random_int($min, $max);
+        $pdfName = 'pdfs/'.$randomNumber.'user_information.pdf';
+        $storeInDatabase = asset($pdfName);
+        // print_r($storeInDatabase);exit;
         $user = new User;
         $user->name = $request->name;
         $user->last_name = $request->last_name;
@@ -44,6 +50,7 @@ class UserController extends Controller
         $user->image = $imageName;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->pdf = $storeInDatabase;
         $user->save();
 
         $date_of_birth = date_create($request->date_of_birth);
@@ -58,8 +65,7 @@ class UserController extends Controller
         // return redirect('/user')->withSuccess('New User Submited !!!');
 
         $pdf = PDF::loadView('pdf.generatePdf2', compact('data'));
-
-        $pdf->save(public_path('pdfs/user_information.pdf'));
+        $pdf->save(public_path($pdfName));
 
         return redirect()->route('user')->withSuccess('User Added Successfully');
     }
@@ -143,7 +149,9 @@ class UserController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="/user/edit/'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="/user/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                    $actionBtn = '<a href="/user/edit/'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                    <a href="/user/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a href="'.$row["pdf"].'" target="_blank" class="btn btn-outline-warning"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
