@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -100,14 +99,14 @@ class ProductController extends Controller
         $f = fopen('php://memory', 'w');
 
 
-        $fields = array('ID', 'FIRST NAME', 'DESCRIPTION', 'IMAGE');
+        $fields = array('ID', 'FIRST NAME', 'DESCRIPTION','IMAGE');
         fputcsv($f, $fields, $delimiter);
 
         $query = Product::all();;
         foreach ($query as $row) {
-            $lineData = array($row['id'], $row['name'], $row['description'], $row['image']);
-            fputcsv($f, $lineData, $delimiter);
-        }
+                $lineData = array($row['id'], $row['name'], $row['description'], $row['image']);
+                fputcsv($f, $lineData, $delimiter);
+            }
 
         fseek($f, 0);
 
@@ -116,20 +115,10 @@ class ProductController extends Controller
 
         fpassthru($f);
     }
-    public function downloadPdf3()
-    {
+    public function downloadPdf3() {
         $products = Product::all();
         $data['products'] = $products;
-        $pdf = Pdf::loadView('pdf.generatePdf3', $data);
+        $pdf = Pdf::loadView('pdf.generatePdf3',$data);
         return $pdf->download('product.pdf');
-    }
-    public function deleteMultiple(Request $request)
-    {
-        $recordIds = $request->input('record_ids');
-
-
-        Product::whereIn('id', $recordIds)->delete();
-
-        return redirect()->back()->with('success', 'Selected records deleted successfully.');
     }
 }
