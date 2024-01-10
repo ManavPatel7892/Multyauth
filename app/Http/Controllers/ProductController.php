@@ -121,4 +121,13 @@ class ProductController extends Controller
         $pdf = Pdf::loadView('pdf.generatePdf3',$data);
         return $pdf->download('product.pdf');
     }
+    public function deleteMultiple(Request $request)
+    {
+        $recordIds = $request->input('record_ids');
+
+
+        Product::whereIn('id', $recordIds)->delete();
+
+        return redirect()->back()->with('success', 'Selected records deleted successfully.');
+    }
 }
