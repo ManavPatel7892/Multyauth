@@ -20,7 +20,7 @@
         </div>
         <div class="body">
             <div class="table-responsive ">
-                <table id="DataTables_Table_0" class="table data-table table-hover">
+                <table id="DataTables_Table_0" class="table user-data-table table-hover">
                     <thead>
                         <tr>
                             <th scope="row">No.</th>
@@ -45,7 +45,7 @@
 <script type="text/javascript">
     $(function () {
 
-      var table = $('.data-table').DataTable({
+      var table = $('.user-data-table').DataTable({
           processing: true,
           serverSide: true,
           ajax: "{{ route('user.user') }}",

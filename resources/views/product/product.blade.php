@@ -22,10 +22,9 @@
                         <form method="post" action="{{ route('deleteMultipleRecords') }}" id="deleteForm">
                             @csrf
                             <div class="table-responsive ">
-                                <table  class="table data-table table-hover">
+                                <table id="DataTables_Table_0" class="table product-data-table table-hover">
                                     <thead>
                                         <tr>
-
                                             <th scope="row">No.</th>
                                             <th>Name</th>
                                             <th>Description</th>
@@ -33,11 +32,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-
                                     </tbody>
-
-
                                 </table>
                             </div>
                         </form>
@@ -51,7 +46,7 @@
 <script type="text/javascript">
     $(function () {
 
-      var table = $('.data-table').DataTable({
+      var table = $('.product-data-table').DataTable({
           processing: true,
           serverSide: true,
           ajax: "{{ route('user.user') }}",
