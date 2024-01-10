@@ -26,7 +26,7 @@
                     <table  class="table  table-hover">
                         <thead>
                             <tr>
-                             <th><input type="checkbox" id="select-all" onclick="return confirm('Are you sure to delete this ?')"></th>
+                             <th><input type="checkbox" id="select-all"></th>
                             <th scope="row">No.</th>
                             <th>Image</th>
                             <th>Name</th>
@@ -56,7 +56,7 @@
                         </tr>
                         @endforeach
                     </tbody>
-                    <button type="button"  class="btn btn-outline-danger btn-md" id="deleteSelected">Delete Selected</button>
+                    <button type="button"  class="btn btn-outline-danger btn-md" id="deleteSelected" onclick="return confirm('Are you sure to delete this ?')">Delete Selected</button>
 
                 </table>
                 </div>
