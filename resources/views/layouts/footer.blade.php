@@ -11,7 +11,7 @@
 
 <!-- Project core js file minify with grunt -->
 <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
-<script src="{{ asset('../js/index.js') }}"></script>
+<script src="{{ asset('assets/js/index.js') }}"></script>
 
 <!-- Project core js file minify with grunt -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
