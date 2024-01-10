@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('product/delete/{id}', [ProductController::class,'delete']);
     Route::get('/export-product', [ProductController::class,'exportProduct'])->name('export-product');
     Route::get('/downloadPdf3', [ProductController::class,'downloadPdf3'])->name('downloadPdf3');
-    Route::get('/product', [ProductController::class, 'productDatatable'])->name('product.product');
+    Route::get('/products', [ProductController::class, 'productDatatable'])->name('product.product');
 
 
 
