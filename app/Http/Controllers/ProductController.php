@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Yajra\DataTables\Facades\Datatables;
+
 
 
 class ProductController extends Controller
@@ -121,13 +123,22 @@ class ProductController extends Controller
         $pdf = Pdf::loadView('pdf.generatePdf3',$data);
         return $pdf->download('product.pdf');
     }
-    public function deleteMultiple(Request $request)
+
+
+    public function productDatatable(Request $request)
     {
-        $recordIds = $request->input('record_ids');
+        if ($request->ajax()) {
+            $data = Product::all();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/product/edit'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="/product/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
 
-
-        Product::whereIn('id', $recordIds)->delete();
-
-        return redirect()->back()->with('success', 'Selected records deleted successfully.');
+        return view('product.product');
     }
 }
