@@ -71,8 +71,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/delete-multiple-records', [ProductController::class, 'deleteMultiple'])->name('deleteMultipleRecords');
 
 
-
-
 });
 
  require __DIR__.'/auth.php';
