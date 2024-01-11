@@ -135,10 +135,25 @@ class ProductController extends Controller
                     $actionBtn = '<a href="/product/edit'.$row["id"].'" class="edit btn btn-outline-success btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a href="/product/delete/'.$row["id"].'" class="delete btn btn-outline-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+                ->addColumn('checkbox', function($row){
+                $checkbox =  '<input type="checkbox" value="'.$row["id"].'" class="record-checkbox" name="record_ids[]">';
+                return $checkbox;
 
-        return view('product.product');
+            })
+            ->rawColumns(['checkbox','action'])
+            ->make(true);
+            return view('product.product');
+            }
+
     }
+    public function deleteMultiple(Request $request)
+    {
+        $recordIds = $request->input('record_ids');
+
+
+        Product::whereIn('id', $recordIds)->delete();
+
+        return redirect()->back()->with('success', 'Selected records deleted successfully.');
+    }
+
 }

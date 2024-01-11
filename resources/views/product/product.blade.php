@@ -19,18 +19,21 @@
 
                     </div>
                     <div class="body">
-                        <form method="post" action="#" id="deleteForm">
+                        <form method="POST" action="{{ route('deleteMultipleRecords') }}" id="deleteForm">
                             @csrf
                             <div class="table-responsive ">
-                                <table id="DataTables_Table_0" class="table product-data-table table-hover">
+                                <table  class="table product-data-table table-hover">
                                     <thead>
                                         <tr>
+                                            <th><input type="checkbox" id="select-all"></th>
                                             <th scope="row">No.</th>
                                             <th>Name</th>
                                             <th>Description</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <button type="button" class="btn btn-outline-danger btn-md" id="deleteSelected"
+                                    onclick="return confirm('Are you sure to delete this ?')">Delete Selected</button>
                                     <tbody>
                                     </tbody>
                                 </table>
@@ -51,6 +54,7 @@
           serverSide: true,
           ajax: "{{ route('product.product') }}",
           columns: [
+              {data: 'checkbox', name: 'checkbox', orderable:false, searchable:false},
               {data: 'id', name: 'id'},
               {data: 'name', name: 'name'},
               {data: 'name', name: 'name'},
@@ -60,4 +64,15 @@
 
     });
   </script>
+
+<script>
+    $(document).ready(function() {
+        $('#select-all').change(function() {
+            $('.record-checkbox').prop('checked', this.checked);
+        });
+        $('#deleteSelected').click(function() {
+                $('#deleteForm').submit();
+            });
+        });
+    </script>
 @endsection

@@ -85,14 +85,14 @@
                         <ul class="nav navbar-nav">
                             <li><a href="javascript:void(0);" class="right_note icon-menu" title="Right Menu">Notes</a></li>
                             <li class="dropdown hidden-xs">
-                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">Create</a>
+                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">Table</a>
                                 <div class="dropdown-menu pb-0 mt-0">
-                                    <a class="dropdown-item pt-2 pb-2" href="javascript:void(0);">User</a>
-                                    <a class="dropdown-item pt-2 pb-2" href="javascript:void(0);">Product</a>
-                                    <a class="dropdown-item pt-2 pb-2" href="javascript:void(0);">Category</a>
-                                    <a class="dropdown-item pt-2 pb-2" href="javascript:void(0);">Report</a>
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('admin') }}">Admin</a>
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('user') }}">User</a>
+                                    <a class="dropdown-item pt-2 pb-2" href="{{ route('product') }}">Product</a>
+                                    {{-- <a class="dropdown-item pt-2 pb-2" href="javascript:void(0);">Report</a> --}}
                                 </div>
-                            </li>
+                            </li>
                             <li class="dropdown hidden-xs">
                                 <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
