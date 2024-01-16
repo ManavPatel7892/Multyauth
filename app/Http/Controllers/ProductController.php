@@ -151,7 +151,7 @@ class ProductController extends Controller
         $recordIds = $request->input('record_ids');
 
 
-        Product::whereIn('id', $recordIds)->delete();
+        Product::where('id', $recordIds)->delete();
 
         return redirect()->back()->with('success', 'Selected records deleted successfully.');
     }
