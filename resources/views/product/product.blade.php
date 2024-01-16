@@ -12,8 +12,10 @@
                             </div>
                         @endif
                         <div class="text-right" style="float: center">
+                            <a type="button" class="btn btn-outline-danger btn-md" id="deleteSelected">Delete Selected</a>
                             <a type="button" href="{{ 'downloadPdf3' }}" class="btn btn-outline-warning">Download Pdf</a>
-                            <a type="button" href="{{ 'export-product' }}" class="btn btn-outline-success">Export Product</a>
+                            <a type="button" href="{{ 'export-product' }}" class="btn btn-outline-success">Export
+                                Product</a>
                             <a type="button" href="/product/create" class="btn btn-outline-secondary">New Product</a>
                         </div>
 
@@ -22,7 +24,7 @@
                         <form method="POST" action="{{ route('deleteMultipleRecords') }}" id="deleteForm">
                             @csrf
                             <div class="table-responsive ">
-                                <table  class="table product-data-table table-hover">
+                                <table id="DataTables_Table_0" class="table product-data-table table-hover">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="select-all"></th>
@@ -32,8 +34,7 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <button type="button" class="btn btn-outline-danger btn-md" id="deleteSelected"
-                                    onclick="return confirm('Are you sure to delete this ?')">Delete Selected</button>
+
                                     <tbody>
                                     </tbody>
                                 </table>
@@ -46,31 +47,49 @@
     </div>
 @endsection
 @section('page-script')
-<script type="text/javascript">
-    $(function () {
+    <script type="text/javascript">
+        $(function() {
 
-      var table = $('.product-data-table').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{ route('product.product') }}",
-          columns: [
-              {data: 'checkbox', name: 'checkbox', orderable:false, searchable:false},
-              {data: 'id', name: 'id'},
-              {data: 'name', name: 'name'},
-              {data: 'name', name: 'name'},
-              {data: 'action', name: 'action', orderable: false, searchable: false},
-          ]
-      });
+            var table = $('.product-data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('product.product') }}",
+                columns: [{
+                        data: 'checkbox',
+                        name: 'checkbox',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
 
-    });
-  </script>
-
-<script>
-    $(document).ready(function() {
-        $('#select-all').change(function() {
-            $('.record-checkbox').prop('checked', this.checked);
         });
-        $('#deleteSelected').click(function() {
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#select-all').change(function() {
+                $('.record-checkbox').prop('checked', this.checked);
+            });
+            $('#deleteSelected').click(function() {
                 $('#deleteForm').submit();
             });
         });
