@@ -10,34 +10,30 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        //     'confirm_password' => 'required|same:password'
-        // ]);
+    public function register(Request $request) {
+        // Your existing registration code...
 
-        $validated = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password'
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
-        if($validated->fails()){
-            return response()->json([
-                'message'=>'Validations Fails',
-                'errors'=>$validated->errors()
-            ],422);
-        }
+        // Create a token for the registered user
+        $token = $user->createToken('MyApp')->plainTextToken;
+        $users = User::all();
+        return response()->json([
+            'message' => 'User registered successfully',
+            'token' => $token,
+            'users' => $users,
+        ], 200);
 
         $user=User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        $success['token'] = $user->createToken('MyApp')->plainTextToken;
+        $success = $user->createToken('MyApp', ['read:user'])->plainTextToken;
         return response()->json([
             'message'=>'User Register Successfully',
             'data'=>$success
@@ -47,6 +43,8 @@ class AuthController extends Controller
     public function login(Request $request){
         if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password])){
             $user = Auth::user();
+            $user = User::find(1);
+        $token = $user->createToken('api-token')->plainTextToken;
             $success['token'] = $user->createToken('MyApp')->plainTextToken;
             $success['name'] = $user->name;
 
@@ -63,5 +61,23 @@ class AuthController extends Controller
             ];
             return response()->json($response);
         }
+    }
+    public function getAllUsers(Request $request)
+    {
+        // Ensure the request is authenticated
+        $user = Auth::user();
+
+        // Check if the user has the necessary permissions
+        if (!$user->tokenCan('read:user')) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        // Fetch all users
+        $users = User::all();
+
+        return response()->json([
+            'message' => 'List of all registered users',
+            'users' => $users,
+        ], 200);
     }
 }
